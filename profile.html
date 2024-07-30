@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify</title>
+    <link rel="stylesheet" href="src/css/output.css" />
+    <link rel="stylesheet" href="src/fontawesome-free-6.6.0-web/css/all.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body
+    class="w-full bg-black text-white p-2 flex flex-row"
+    x-data="{ openSidebar: true }"
+  >
+    <!-- sidebar Section Start -->
+    <aside
+      x-show="!openSidebar"
+      class="flex-col justify-between text-xl items-center py-6 fixed bottom-0 left-0 z-40 h-screen w-20"
+    >
+      <div class="flex flex-col absolute top-8 left-7">
+        <a href="index.html"
+          ><i
+            class="fa-solid fa-house cursor-pointer mb-7 text-gray-400 hover:text-white"
+          ></i
+        ></a>
+        <i
+          class="fa-solid fa-magnifying-glass cursor-pointer text-gray-400 hover:text-white"
+        ></i>
+      </div>
+      <div class="flex flex-col cursor-pointer absolute bottom-28">
+        <i
+          class="fa-solid fa-layer-group text-gray-400 hover:text-white translate-x-7"
+          @click="openSidebar = true"
+        ></i>
+        <div
+          class="mt-6 h-96 overflow-hidden cursor-pointer hover:overflow-y-scroll px-4 py-2"
+        >
+          <div
+            class="w-12 h-12 hover:ring-8 ring-gray-300 ring-opacity-15 rounded bg-cover mb-4"
+            style="background-image: url('src/img/favorite.jpg')"
+          ></div>
+          <div
+            class="w-12 h-12 hover:ring-8 ring-gray-300 ring-opacity-15 rounded bg-cover mb-4"
+            style="background-image: url('src/img/album1.jpg')"
+          ></div>
+          <div
+            class="w-12 h-12 hover:ring-8 ring-gray-300 ring-opacity-15 rounded bg-cover mb-4"
+            style="background-image: url('src/img/album2.jpg')"
+          ></div>
+          <div
+            class="w-12 h-12 hover:ring-8 ring-gray-300 ring-opacity-15 rounded bg-cover mb-4"
+            style="background-image: url('src/img/album3.jpg')"
+          ></div>
+          <div
+            class="w-12 h-12 hover:ring-8 ring-gray-300 ring-opacity-15 rounded bg-cover mb-4"
+            style="background-image: url('src/img/album4.jpg')"
+          ></div>
+          <div
+            class="w-12 h-12 hover:ring-8 ring-gray-300 ring-opacity-15 rounded bg-cover mb-4"
+            style="background-image: url('src/img/album5.jpg')"
+          ></div>
+          <div
+            class="w-12 h-12 hover:ring-8 ring-gray-300 ring-opacity-15 rounded bg-cover mb-4"
+            style="background-image: url('src/img/album6.jpg')"
+          ></div>
+          <div
+            class="w-12 h-12 hover:ring-8 ring-gray-300 ring-opacity-15 rounded bg-cover mb-4"
+            style="background-image: url('src/img/album7.jpg')"
+          ></div>
+        </div>
+      </div>
+    </aside>
+    <!-- sidebar Section End -->
+
+    <!-- sidebar full Section Start -->
+    <aside
+      class="flex flex-col justify-between p-7 fixed bottom-0 left-0 z-20 h-screen w-96"
+      x-show="openSidebar"
+    >
+      <div class="flex flex-col">
+        <a href="index.html">
+          <div class="flex items-center mb-6 cursor-pointer group">
+            <i
+              class="fa-solid fa-house text-gray-400 group-hover:text-white mr-4 text-xl"
+            ></i>
+            <h4
+              class="font-semibold text-gray-400 group-hover:text-white text-base"
+            >
+              Home
+            </h4>
+          </div>
+        </a>
+        <a href="search.html">
+          <div class="flex items-center mb-6 cursor-pointer group">
+            <i
+              class="fa-solid fa-magnifying-glass text-gray-400 group-hover:text-white mr-4 text-xl"
+            ></i>
+            <h4
+              class="font-semibold text-gray-400 group-hover:text-white text-base"
+            >
+              Cari
+            </h4>
+          </div>
+        </a>
+      </div>
+      <div class="flex flex-col cursor-pointer relative w-full mb-12">
+        <div class="flex justify-between" x-data="{ openPlaylist: false }">
+          <div class="flex group items-center" @click="openSidebar = false">
+            <i
+              class="fa-solid fa-layer-group text-gray-400 group-hover:text-white text-xl mr-3"
+            ></i>
+            <h4
+              class="font-semibold text-gray-400 group-hover:text-white text-base"
+            >
+              Koleksi Kamu
+            </h4>
+          </div>
+          <div class="text-gray-400">
+            <i
+              class="fa-solid fa-plus hover:bg-white/15 p-2 rounded-full"
+              @click="openPlaylist = !openPlaylist"
+            ></i>
+          </div>
+          <div
+            x-show="openPlaylist"
+            x-transition
+            class="p-1 bg-gray-800 rounded w-44 absolute z-50 top-10 right-12"
+          >
+            <a href="playlist-baru.html">
+              <div class="p-2 hover:bg-white/30 text-sm text-gray-300">
+                <i class="fa-solid fa-music mr-2"></i>
+                Buat playlist baru
+              </div>
+            </a>
+            <div class="p-2 hover:bg-white/30 text-sm text-gray-300">
+              <i class="fa-solid fa-folder mr-2"></i>
+              Buat folder playlist
+            </div>
+          </div>
+        </div>
+        <div class="flex mt-4 space-x-2">
+          <span
+            class="py-1 px-3 bg-white/20 rounded-full text-sm font-semibold hover:bg-white/30 transition duration-500"
+            >Playlist</span
+          >
+          <span
+            class="py-1 px-3 bg-white/20 rounded-full text-sm font-semibold hover:bg-white/30 transition duration-500"
+            >Artis</span
+          >
+          <span
+            class="py-1 px-3 bg-white/20 rounded-full text-sm font-semibold hover:bg-white/30 transition duration-500"
+            >Podcast & Acara</span
+          >
+        </div>
+        <div class="mt-3 h-96 overflow-hidden hover:overflow-y-scroll">
+          <div class="flex justify-between mb-5">
+            <div x-data="{ open: true }">
+              <div @click="open = false" x-show="open">
+                <i
+                  class="fa-solid fa-magnifying-glass p-2 text-gray-400 hover:bg-white/15 rounded-full hover:text-white absolute text-sm"
+                ></i>
+              </div>
+              <div
+                x-show="!open"
+                x-transition.origin.left
+                @click.outside="open = true"
+              >
+                <i
+                  class="fa-solid fa-magnifying-glass absolute translate-x-2 translate-y-2 text-sm text-white/70"
+                ></i>
+                <input
+                  type="text"
+                  placeholder="Cari di Koleksi Kamu"
+                  class="bg-white/15 rounded placeholder:text-white/70 text-sm px-8 py-1 w-48 outline-none text-white/70"
+                />
+              </div>
+            </div>
+            <div
+              class="flex items-center text-gray-400 hover:scale-105 hover:text-white space-x-1"
+            >
+              <p class="text-sm font-semibold">Baru diputar</p>
+              <i class="fa-solid fa-list"></i>
+            </div>
+          </div>
+          <div class="flex hover:bg-white/10 rounded p-2">
+            <div
+              class="w-12 h-12 rounded bg-cover mr-4"
+              style="background-image: url('src/img/favorite.jpg')"
+            ></div>
+            <div>
+              <h2 class="font-semibold">Lagu yang Disukai</h2>
+              <div class="flex space-x-2 text-sm items-center">
+                <i class="fa-solid fa-thumbtack text-green-500"></i>
+                <p class="font-semibold text-gray-400">Playlist - 190 lagu</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex hover:bg-white/10 rounded p-2">
+            <div
+              class="w-12 h-12 rounded bg-cover mr-4"
+              style="background-image: url('src/img/album1.jpg')"
+            ></div>
+            <div>
+              <h2 class="font-semibold">simon's terari</h2>
+              <p class="text-sm font-semibold text-gray-400">
+                Playlist - F# Major Seven Enjoyers
+              </p>
+            </div>
+          </div>
+          <div class="flex hover:bg-white/10 rounded p-2">
+            <div
+              class="w-12 h-12 rounded bg-cover mr-4"
+              style="background-image: url('src/img/album2.jpg')"
+            ></div>
+            <div>
+              <h2 class="font-semibold">Daily Mix 2</h2>
+              <p class="text-sm font-semibold text-gray-400">
+                Playlist - Spotify
+              </p>
+            </div>
+          </div>
+          <div class="flex hover:bg-white/10 rounded p-2">
+            <div
+              class="w-12 h-12 rounded bg-cover mr-4"
+              style="background-image: url('src/img/album3.jpg')"
+            ></div>
+            <div>
+              <h2 class="font-semibold">Daily Mix 1</h2>
+              <p class="text-sm font-semibold text-gray-400">
+                Playlist - Spotify
+              </p>
+            </div>
+          </div>
+          <div class="flex hover:bg-white/10 rounded p-2">
+            <div
+              class="w-12 h-12 rounded bg-cover mr-4"
+              style="background-image: url('src/img/album4.jpg')"
+            ></div>
+            <div>
+              <h2 class="font-semibold">Judika</h2>
+              <p class="text-sm font-semibold text-gray-400">
+                Playlist - Spotify
+              </p>
+            </div>
+          </div>
+          <div class="flex hover:bg-white/10 rounded p-2">
+            <div
+              class="w-12 h-12 rounded bg-cover mr-4"
+              style="background-image: url('src/img/album5.jpg')"
+            ></div>
+            <div>
+              <h2 class="font-semibold">This Is: Sheila On 7</h2>
+              <p class="text-sm font-semibold text-gray-400">
+                Playlist - Spotify
+              </p>
+            </div>
+          </div>
+          <div class="flex hover:bg-white/10 rounded p-2">
+            <div
+              class="w-12 h-12 rounded bg-cover mr-4"
+              style="background-image: url('src/img/album6.jpg')"
+            ></div>
+            <div>
+              <h2 class="font-semibold">Anak Senja</h2>
+              <p class="text-sm font-semibold text-gray-400">
+                Playlist - Spotify
+              </p>
+            </div>
+          </div>
+          <div class="flex hover:bg-white/10 rounded p-2">
+            <div
+              class="w-12 h-12 rounded bg-cover mr-4"
+              style="background-image: url('src/img/album7.jpg')"
+            ></div>
+            <div>
+              <h2 class="font-semibold">Skena banget</h2>
+              <p class="text-sm font-semibold text-gray-400">
+                Playlist - Spotify
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- sidebar full Section End -->
+
+    <!-- Main Section Start -->
+    <section
+      class="w-screen bg-black rounded-lg p-1"
+      :class="openSidebar ? 'ml-96' : 'ml-24'"
+    >
+      <div
+        class="flex items-center justify-center fixed z-50 top-7"
+        :class="openSidebar ? 'left-1/4 translate-x-20' : 'translate-x-5'"
+      >
+        <div
+          class="px-3 py-1 rounded-full bg-black opacity-35 cursor-not-allowed"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+      </div>
+      <div
+        class="flex flex-wrap fixed right-7 z-50 top-7"
+        x-data="{ showProfile: false }"
+      >
+        <div
+          class="px-3 py-1.5 bg-white rounded-full text-sm font-bold mr-2 cursor-pointer hover:scale-105 text-black"
+        >
+          Jelajahi Premium
+        </div>
+        <div
+          class="px-3 py-1.5 bg-black rounded-full text-sm font-bold mr-2 cursor-pointer hover:scale-105"
+        >
+          <i class="fa-solid fa-circle-arrow-down"></i>
+          Pasang Aplikasi
+        </div>
+        <div
+          class="px-2.5 py-1 bg-black rounded-full cursor-pointer mr-2 hover:scale-105 group"
+        >
+          <i
+            class="fa-regular fa-bell text-gray-400 group-hover:text-white"
+          ></i>
+        </div>
+        <div
+          @click="showProfile = !showProfile"
+          class="px-2 bg-red-500 rounded-full border-4 border-black text-black font-bold hover:scale-105 cursor-pointer"
+        >
+          F
+        </div>
+        <div
+          class="flex flex-col p-1 bg-zinc-800 text-white absolute right-0 top-10 rounded text-sm shadow-lg"
+          x-show="showProfile"
+        >
+          <div
+            class="w-48 flex justify-between items-center px-4 py-2 hover:bg-white/15 cursor-pointer"
+          >
+            <span>Akun</span>
+            <i class="fa-solid fa-up-right-from-square"></i>
+          </div>
+          <div
+            class="w-48 flex justify-between items-center px-4 py-2 hover:bg-white/15 cursor-pointer"
+          >
+            <span>Profil</span>
+          </div>
+          <div
+            class="w-48 flex justify-between items-center px-4 py-2 hover:bg-white/15 cursor-pointer"
+          >
+            <span>Upgrade ke Premium</span>
+            <i class="fa-solid fa-up-right-from-square"></i>
+          </div>
+          <div
+            class="w-48 flex justify-between items-center px-4 py-2 hover:bg-white/15 cursor-pointer"
+          >
+            <span>Pengaturan</span>
+          </div>
+          <div
+            class="w-48 flex justify-between items-center px-4 py-2 hover:bg-white/15 cursor-pointer border-t border-white/20"
+          >
+            <span>Keluar</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="w-full h-64 bg-gradient-to-b from-white/30 to-white/15 rounded-t-md backdrop-blur-xl p-5 flex items-end space-x-4"
+        x-data="{changePic: false}"
+      >
+        <div
+          class="w-32 h-32 bg-black/40 rounded-full flex justify-center items-center shadow-lg flex-col"
+          @mouseover="changePic = true"
+          @mouseout="changePic = false"
+        >
+          <i
+            class="fa-solid text-6xl"
+            x-bind:class="changePic ? 'fa-pencil text-white' : 'fa-user text-white/20'"
+          ></i>
+          <span
+            x-text="changePic ? 'Pilih foto' : ''"
+            class="text-white text-xl"
+          ></span>
+        </div>
+        <div>
+          <span>Playlist</span>
+          <h1 class="text-5xl text-white font-bold mb-3 tracking-tighter">
+            F# Major Seven Enjoyers
+          </h1>
+          <span class="text-sm">9 Playlist Publik - 16 Mengikuti</span>
+        </div>
+      </div>
+      <div
+        class="w-full h-72 bg-gradient-to-b from-gray-800 to-black px-7 pt-10"
+      >
+        <i
+          class="fa-solid fa-ellipsis text-2xl text-gray-400 hover:text-white"
+        ></i>
+
+        <div class="flex justify-between mt-5 items-center relative">
+          <div>
+            <h2 class="text-2xl text-white font-bold">
+              Artis teratas bulan ini
+            </h2>
+            <p class="text-sm text-gray-400">Hanya bisa dilihat kamu</p>
+          </div>
+        </div>
+      </div>
+      <div class="p-3 hover:bg-white/15">
+        <div class="w-36 h-36 rounded-full bg-zinc-700"></div>
+      </div>
+
+      <div class="mt-16 grid grid-cols-5 pb-16 border-b border-gray-900/5">
+        <div>
+          <h3 class="font-bold">Perusahaan</h3>
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Tentang</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Pekerjaan</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >For the Record</a
+          >
+        </div>
+        <div>
+          <h3 class="font-bold">Komunitas</h3>
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Untuk Artis</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Pengembang</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Iklan</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Investor</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Vendor</a
+          >
+        </div>
+        <div>
+          <h3 class="font-bold">Tautan berguna</h3>
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Dukungan</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Aplikasi Seluler Gratis</a
+          >
+        </div>
+        <div>
+          <h3 class="font-bold">Tautan berguna</h3>
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Premium Individual</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Premium Duo</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Premium Family</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Premium Student</a
+          >
+          <a
+            href="#"
+            class="text-gray-400 hover:underline block hover:text-white mt-2"
+            >Spotify Free</a
+          >
+        </div>
+        <div class="flex items-start space-x-3">
+          <div class="px-3 py-2 bg-white/15 hover:bg-white/30 rounded-full">
+            <i class="fa-brands fa-instagram text-lg"></i>
+          </div>
+          <div class="px-3 py-2 bg-white/15 hover:bg-white/30 rounded-full">
+            <i class="fa-brands fa-twitter text-lg"></i>
+          </div>
+          <div class="px-3 py-2 bg-white/15 hover:bg-white/30 rounded-full">
+            <i class="fa-brands fa-facebook text-lg"></i>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="my-10 flex justify-between items-center pb-16">
+        <div>
+          <a href="#" class="text-sm text-gray-400 hover:text-white mr-4"
+            >Hukum</a
+          >
+          <a href="#" class="text-sm text-gray-400 hover:text-white mr-4"
+            >Pusat Keamanan & Privasi</a
+          >
+          <a href="#" class="text-sm text-gray-400 hover:text-white mr-4"
+            >Kebijakan Privasi</a
+          >
+          <a href="#" class="text-sm text-gray-400 hover:text-white mr-4"
+            >Cookie</a
+          >
+          <a href="#" class="text-sm text-gray-400 hover:text-white mr-4"
+            >Tentang Iklan</a
+          >
+          <a href="#" class="text-sm text-gray-400 hover:text-white mr-4"
+            >Aksesibilitas</a
+          >
+        </div>
+        <p class="text-sm text-gray-400 mr-4">&copy; 2024 Muhammad Farhan</p>
+      </div>
+    </section>
+    <!-- Main Section End -->
+
+    <!-- Player Section Start -->
+    <div
+      class="flex justify-between items-center w-full h-24 fixed bottom-0 bg-black p-4 z-50"
+    >
+      <div class="flex space-x-5 items-center" x-data="{ showHint: false}">
+        <div
+          class="w-14 h-14 rounded bg-cover"
+          style="background-image: url('src/img/album7.jpg')"
+        ></div>
+        <div class="flex flex-col">
+          <a href="#" class="font-semibold text-sm text-white hover:underline"
+            >Angin Pujaan Hujan</a
+          >
+          <a href="#" class="text-xs text-gray-400 hover:underline"
+            >Payung Teduh</a
+          >
+        </div>
+        <i
+          class="fa-solid fa-circle-plus text-gray-400 hover:text-white cursor-pointer"
+          @mouseover="showHint = true"
+          @mouseout="showHint = false"
+        ></i>
+        <div
+          class="w-56 px-2 py-1 bg-gray-800 rounded absolute -top-2 left-28 text-sm"
+          x-show="showHint"
+          x-transition.duration.500ms
+        >
+          <p>Tambahkan ke Lagu yang Disukai</p>
+        </div>
+      </div>
+      <div
+        class="flex flex-col justify-center items-center space-y-2"
+        x-data="{ isShuffle: false, showPrev: false, showPlay: false, showNext: false, showRepeat: [false, false] }"
+      >
+        <div class="flex items-center space-x-7 text-gray-400 text-xl">
+          <i
+            class="fa-solid cursor-pointer hover:text-white fa-shuffle"
+            @click="isShuffle = !isShuffle"
+            :class="isShuffle ? 'text-green-500':'text-gray-400'"
+          ></i>
+          <i
+            class="fa-solid cursor-pointer hover:text-white fa-backward-step"
+            @mouseover="showPrev = true"
+            @mouseout="showPrev = false"
+          ></i>
+          <i
+            class="fa-solid cursor-pointer hover:scale-110 fa-circle-play text-3xl text-white"
+            @mouseover="showPlay = true"
+            @mouseout="showPlay = false"
+          ></i>
+          <i
+            class="fa-solid cursor-pointer hover:text-white fa-forward-step"
+            @mouseover="showNext = true"
+            @mouseout="showNext = false"
+          ></i>
+          <i
+            class="fa-solid cursor-pointer hover:text-white fa-repeat"
+            x-bind:class="showRepeat[1] ? 'text-green-500': 'text-gray-400'"
+            @click="showRepeat[1] = !showRepeat[1]"
+            @mouseover="showRepeat[0] = true"
+            @mouseout="showRepeat[0] = false"
+          ></i>
+          <!-- <div class="py-1 px-2 bg-zinc-800 absolute text-white rounded text-sm font-semibold -top-5 -translate-x-14">Sebelumnya</div> -->
+        </div>
+        <div
+          class="flex items-center text-xs text-gray-400 space-x-2 w-full"
+          x-data="{ duration: '0' }"
+        >
+          <div
+            class="py-1 px-2 bg-zinc-800 absolute text-white rounded text-sm font-semibold -top-5 left-1/2 -translate-x-24"
+            x-show="showPrev"
+          >
+            Sebelumnya
+          </div>
+          <div
+            class="py-1 px-2 bg-zinc-800 absolute text-white rounded text-sm font-semibold -top-5 left-1/2 -translate-x-14"
+            x-show="showPlay"
+          >
+            Putar
+          </div>
+          <div
+            class="py-1 px-2 bg-zinc-800 absolute text-white rounded text-sm font-semibold -top-5 left-1/2"
+            x-show="showNext"
+          >
+            Berikutnya
+          </div>
+          <div
+            class="py-1 px-2 bg-zinc-800 absolute text-white rounded text-sm font-semibold -top-5 left-1/2 translate-x-10"
+            x-show="showRepeat[0]"
+          >
+            Aktifkan repeat
+          </div>
+          <span>0:00</span>
+          <div class="relative">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              class="bg-white/15 appearance-none rounded-full h-1 hover:range-thumb w-[400px] relative z-50 cursor-pointer"
+              x-model="duration"
+            />
+            <div
+              class="h-1 bg-white absolute bottom-[3px] rounded-full"
+              x-bind:style="{ width: duration + '%' }"
+            ></div>
+          </div>
+          <span>0:00</span>
+        </div>
+      </div>
+      <div
+        class="flex justify-center items-center space-x-3 text-gray-400 w-fit"
+        x-data="{ volume: '100', mute: false }"
+      >
+        <i
+          class="hover:text-white cursor-pointer fa-regular fa-circle-play"
+        ></i>
+        <i class="hover:text-white cursor-pointer fa-solid fa-microphone"></i>
+        <i class="hover:text-white cursor-pointer fa-solid fa-bars"></i>
+        <i class="hover:text-white cursor-pointer fa-solid fa-computer"></i>
+        <i
+          class="hover:text-white cursor-pointer fa-solid fa-volume-high"
+          x-bind:class="mute ? 'fa-volume-xmark' : 'fa-volume-high'"
+          @click="mute = !mute; volume = '0';"
+        ></i>
+        <div class="relative w-fit">
+          <div
+            class="h-1 rounded-full bg-green-500 absolute z-40 top-3.5"
+            :style="{ width: volume + '%' }"
+          ></div>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="100"
+            x-model="volume"
+            class="appearance-none bg-white/15 rounded-full h-1 cursor-pointer w-20 relative z-50"
+            x-bind:class="mute ? '':'hover:range-thumb'"
+          />
+        </div>
+        <i
+          class="hover:text-white cursor-pointer fa-solid fa-up-right-from-square"
+        ></i>
+        <i
+          class="hover:text-white cursor-pointer fa-solid fa-up-right-and-down-left-from-center"
+        ></i>
+      </div>
+    </div>
+    <!-- Player Section End -->
+  </body>
+</html>
